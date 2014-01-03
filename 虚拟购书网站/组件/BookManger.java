@@ -60,6 +60,27 @@ public class BookManger extends DBMS {
 	                	 }
 	                	 return(res);
 	                 }
+	                 public ResultSet getBookinfo_unclearA(String author)//模糊查询,作者
+	                 {
+	                	 try{
+	                		 String sql="SELECT *FROM bookinfo WHERE author LIKE '%"+author.trim()+"%'";
+	                	     this.res=this.doSelect(sql);
+	                	 }catch(Exception e){
+	                		 e.printStackTrace();
+	                	 }
+	                	 return(res);
+	                 }
+	                 public ResultSet getBookinfo_unclearT(String title)//模糊查询，标题
+	                 {
+	                	try{
+	                		String sql="SELECT *FROM bookinfo WHERE title  LIKE '%"+title.trim()+"%'";
+	                		this.res=this.doSelect(sql);
+	                	}catch(Exception e)
+	                	{
+	                	  e.printStackTrace();
+	                	}
+	                	return(res);
+	                 }
 	                 public int insertBook(String isbn,String title,String author,String pulish,String pulishdate,String price,String tatolnumber,String leavenumber,String comment)
 	                 {
 	                	 int counter=0;
@@ -116,6 +137,4 @@ public class BookManger extends DBMS {
 	                	 this.res=null;
 	                 }
 	                 
-	                
-	                
 }

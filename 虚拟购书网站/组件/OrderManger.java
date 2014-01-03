@@ -31,6 +31,7 @@ public class OrderManger extends DBMS {
 	            	     }
 	            	     return(res);
 	               }
+	               
 	               public int insertOrder(String username,String userid,String orderdate,String paybill,String ispay,String comment)
 	               {
 	            	   int counter=0;

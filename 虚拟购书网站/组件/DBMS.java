@@ -156,4 +156,16 @@ public class DBMS {
  	    }
  	    return(excute);
     }
+    public String ChangeFromInt (int number)
+    {
+    	  return(number+"");
+    }
+    public String ChangeFromDouble(double number)
+    {
+    	return(number+"");
+    }
+    public  int ChangeFromString(String str)
+    {
+    	return(Integer.parseInt(str));
+    }
 }
