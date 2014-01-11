@@ -10,6 +10,16 @@ public class BookManger extends DBMS {
 	                	 this.getConnection();
 	                 }
 	                 /*建立一个可以根据多项字段进行查询的查询引擎*/
+	                 public ResultSet getBookinfo()
+	                 {
+	                	  try{
+	                		  String sql="SELECT * FROM bookinfo ";
+	                		  this.res=this.doSelect(sql);
+	                	  }catch(Exception e){
+	                		  e.printStackTrace();
+	                	  }
+	                	  return(res);
+	                 }
 	                 public ResultSet getBookinfo(String isbn)//依据书的ISBN号码查询
 	                 {
 	                	  try{
@@ -50,6 +60,16 @@ public class BookManger extends DBMS {
 	                	  }
 	                	  return(res);
 	                 }
+	                 public ResultSet getBookinfo_salerid(int saleid)//依照提供书籍的用户id查询
+	                 {
+	                	  try{
+	                		  String sql="SELECT *FROM bookinfo WHERE saleid='"+saleid+"'";
+	                		  this.res=this.doSelect(sql);
+	                	  }catch(Exception e){
+	                		  e.printStackTrace();
+	                	  }
+	                	  return(res);
+	                 }
 	                 public ResultSet getBookinfo_pulish(String pulish)//依据出版社查询
 	                 {
 	                	 try{
@@ -81,12 +101,33 @@ public class BookManger extends DBMS {
 	                	}
 	                	return(res);
 	                 }
-	                 public int insertBook(String isbn,String title,String author,String pulish,String pulishdate,String price,String tatolnumber,String leavenumber,String comment)
+	                 public ResultSet getBookinfo_unclearP(String pulish)//模糊查询 出版社
+	                 {
+	                	 try{
+	                		 String sql="SELECT *FROM bookinfo WHERE pulish LIKE '%"+pulish.trim()+"%'";
+	                	     this.res=this.doSelect(sql);
+	                	  }catch(Exception e){
+	                		 e.printStackTrace();
+	                	 }
+	                	 return(res);
+	                 }
+	                 public ResultSet getBookinfo_unclearI(String isbn)//模糊查询 isbn号
+	                 {
+	                	 try{
+	                		 String sql="SELECT *FROM bookinfo WHERE isbn LIKE '%"+isbn.trim()+"%'";
+	                	    this.res=this.doSelect(sql);
+	                	 }catch(Exception e){
+	                		 e.printStackTrace();
+	                	 }
+	                	 return(res);
+	                 }
+	                 public int insertBook(String isbn,String title,String author,String pulish,String pulishdate,String price,String tatolnumber,String leavenumber,String comment,String salename,int saleid)
 	                 {
 	                	 int counter=0;
 	                     try{
-	                		 String sql="INSERT INTO bookinfo (isbn,title,author,pulish,pulishdate,price,tatolnumber,leavenumber,comment) VALUES('"+isbn+"','"+title+"','"+author+"','"+pulish+"','"+pulishdate+"','"+price+"','"+tatolnumber+"','"+leavenumber+"','"+comment+"') ";
-	                		 counter=this.doInsert(sql);
+	                		 //String sql="INSERT INTO bookinfo (isbn,title,author,pulish,pulishdate,price,tatolnumber,leavenumber,comment) VALUES('"+isbn+"','"+title+"','"+author+"','"+pulish+"','"+pulishdate+"','"+price+"','"+tatolnumber+"','"+leavenumber+"','"+comment+"') ";
+	                     String sql="INSERT INTO bookinfo (isbn,title,author,pulish,pulishdate,price,tatolnumber,leavenumber,comment,salepeoplename,saleid) VALUES('"+isbn+"','"+title+"','"+author+"','"+pulish+"','"+pulishdate+"','"+price+"','"+tatolnumber+"','"+leavenumber+"','"+comment+"','"+salename+"','"+saleid+"') ";
+	                    	 counter=this.doInsert(sql);
 	                		 this.close();
 	                	 }catch(Exception e){
 	                		 e.printStackTrace();
@@ -107,7 +148,7 @@ public class BookManger extends DBMS {
 	                	 }
 	                	 return(counter);
 	                 }
-	                 public int updateBook(String bnumber,String title,String author,String isbn,String pulish,String pulishdate)//修改书的基本信息
+	                 public int updateBook(String bnumber,String title,String author,String isbn,String pulish,String pulishdate)//修改书的基本信息，作者，出版社，出版日期
 	                 {
 	                	 int counter=0;
 	                	 try{
@@ -120,16 +161,17 @@ public class BookManger extends DBMS {
 	                	 }
 	                	 return(counter);
 	                 }
-	                 public int updateBook(String bnumber,String totalnumber,String leavenumber)
+	                 public int updateBook(String bnumber,String price,String addnumber)
 	                 {
-	                	   int counter=0;
-	                	   try{
-	                		  String sql="UPDATE bookinfo SET tatolnumber='"+totalnumber+"',leavenumber='"+leavenumber+"' WHERE booknumebr='"+bnumber+"'";
-	                		  counter=this.doUpdate(sql);
-	                	   }catch(Exception e){
-	                		   e.printStackTrace();
-	                	   }
-	                	   return(counter);
+	                	 int counter=0;
+	                	 ResultSet res=this.doSelect(bnumber);
+	                	 try{
+	                		String sql="";
+	                		
+	                	 }catch(Exception e){
+	                		 e.printStackTrace();
+	                	 }
+	                	 return(counter);
 	                 }
 	                 public void close()
 	                 {
