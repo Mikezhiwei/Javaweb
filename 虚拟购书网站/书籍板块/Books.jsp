@@ -8,7 +8,15 @@
 </head>
 <body>
        <%@include file="/Main.jsp" %>
-      <form action="QueryBookinfo.jsp" name="searchform" method="post"  >
+       <%
+             String test=request.getParameter("number");
+             if(test.equals("null"))
+             {
+           	  response.sendRedirect("http://localhost:8080/EletronicWeb/LoginModel/Login.jsp");
+           	 }
+       %>
+      <form action="QueryBookinfo.jsp" name="searchform" method="post">
+         <input name="number" type="hidden" value=<%=request.getParameter("number")%>>
          <table align="center" class="style1" cellpadding="1">
              <tr align="center" class="style6" bgcolor="gray">
               <td height="30" width="60%" align="center">查询关键字
@@ -18,8 +26,12 @@
               <td height="30" width="20%" align="center">查询方式
               </td>
              </tr>
-              <tr>
-              <td width="100%" height="50">&nbsp;&nbsp;
+              <tr align="center" class="style3" bgcolor="">
+               <td width="100%" height="50">
+                 <marquee direction=left onmouseover="this.stop()" onmouseout="this.start()">
+                     这里可以快速查询想是否有想要买的书籍，默认查询依据为标题，默认查询方式为模糊查询
+                 </marquee>
+               </td>
               </tr>
               <tr bgcolor="yellow" class="style6" align="center">
                 <td height="40" width="60%" align="center" >
@@ -36,7 +48,7 @@
                  </td>
                  <td height="40" width="20%" align="center">
                   <select name="islcear">
-                   <option value="1"></option>
+                   <option value="2"></option>
                    <option value="1">精确查询</option>
                    <option value="2">模糊查询</option>
                   </select>

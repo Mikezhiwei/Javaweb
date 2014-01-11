@@ -26,6 +26,8 @@
            </td>
            <td height="30">Ê£Óà
            </td>
+           <td  height="30">Âô¼Ò
+           </td>
             <td height="30">¹ºÂò
            </td>
          </tr>
@@ -33,8 +35,12 @@
               ResultSet bookres=bookinfo.getBookinfo();
               while(bookres.next())
               {
+            	  if(bookres.getString("saleid").equals(request.getParameter("number")))
+            	  {
+            		  continue;
+            	  }
             	  %>
-            	  <tr align="center" class="style1" height="40" bgcolor="purple">
+            	  <tr align="center" class="style1" height="40" bgcolor="pink">
             	  <td><%=bookres.getString("title") %>
             	  </td>
             	  <td><%=bookres.getString("author") %>
@@ -45,11 +51,14 @@
             	  </td>
             	  <td><%=bookres.getString("leavenumber") %>
             	  </td>
+            	  <td><%=bookres.getString("salepeoplename") %>
+            	  </td>
                   <td><a href="">¹ºÂò</a>
             	  </td>
             	  </tr>
             	  <% 
               }
+              bookinfo.close();
          %>
      </table>  
      <%@include file="/rear.jsp" %>

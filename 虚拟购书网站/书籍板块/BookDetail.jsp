@@ -12,7 +12,7 @@
 <jsp:useBean id="bookinfo" class="DateManger.BookManger"></jsp:useBean>
    <%@include file="/Main.jsp" %>
          <%
-             ResultSet res=bookinfo.getBookinfo_number(request.getParameter("number"));
+             ResultSet res=bookinfo.getBookinfo_number(request.getParameter("bnumber"));
              res.next();
           %>     
           <table width="750"align="center" bgcolor="red" class="style1">
@@ -58,8 +58,8 @@
             </tr>
           </table>
           <%
+           bookinfo.close();
        %>
-     
-   <%@include file="/rear.jsp" %>
+     <%@include file="/rear.jsp" %>
 </body>
 </html>

@@ -30,10 +30,12 @@
          <td height="30">购买
          </td>
       </tr>
-     <%     ResultSet res=null;
+     <%     
+            ResultSet res=null;
             book.setQueryStr(bookinfo.ChangeCoding(request.getParameter("bookquery")));
             book.setQway(book.ChangedFromString(request.getParameter("way")));
             book.setIsclear(book.ChangedFromString(request.getParameter("islcear")));
+            book.setSaleid(book.ChangedFromString(request.getParameter("number")));
             if(book.getIsclear()==1)
             {
             	   if(book.getQway()==1)
@@ -72,7 +74,7 @@
         	          </td>
         	          <td height="40"><%=res.getString("leavenumber") %>
         	          </td>
-        	          <td height="40"><a href="BookDetail.jsp?number=<%=res.getObject(1) %>">详情</a>
+        	          <td height="40"><a href="BookDetail.jsp?bnumber=<%=res.getObject(1)%>">详情</a>
         	          </td>
         	          <td height="40"><a href="">购买</a>
         	          </td>
@@ -83,7 +85,7 @@
           %>
          </table>
          <div align="center">
-         <font size="3">返回继续<a href="Books.jsp"><font color="blue" size="3"></font>查询</a></font>
+         <font size="3">返回继续<a href="Books.jsp?number=<%=book.getSaleid()+""%>"><font color="blue" size="3"></font>查询</a></font>
          </div>
          <%@include file="/rear.jsp" %>
 </body>
